@@ -1,0 +1,24 @@
+{
+  "name": "angular-chosen-localytics",
+  "version": "1.0.5",
+  "main": "chosen.js",
+  "ignore": [
+    "src",
+    "example"
+  ],
+  "dependencies": {
+    "chosen": "~1.0.0",
+    "angular": ">=1.2.0"
+  },
+  "homepage": "https://github.com/localytics/angular-chosen",
+  "_release": "1.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.5",
+    "commit": "b9229f7f18cea2dee1aafb34024b4ab2dd2c0119"
+  },
+  "_source": "git://github.com/localytics/angular-chosen.git",
+  "_target": "~1.0.5",
+  "_originalSource": "angular-chosen-localytics",
+  "_direct": true
+}
