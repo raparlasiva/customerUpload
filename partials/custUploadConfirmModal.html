@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancelUploadConfirmModal()" >&times;</button>
+    <h3 class="modal-title">Success  Confirmation</h3>
+</div>
+  
+<div class="modal-body">
+    <p>The Following Files have been uploaded:</p>
+    <ul ng-repeat="item in uploader.queue">
+        <li><strong>{{ item.file.name }}</strong></li>
+    </ul>    
+</div>
+
+<div class="modal-footer">
+    <!--<button class="btn" ng-click="cancelUploadConfirmModal()">Cancel</button>-->
+    <button class="btn btn-primary" ng-click="successlUploadConfirmModal()">Ok</button>
+</div>   
+

@@ -1,0 +1,186 @@
+<!-- Wrap all page content here -->
+<div id="wrap" nv-file-over="" nv-file-drop="" uploader="uploader">
+    <div id="main" class="container clear-top">
+        <!--Form start  -->
+        <form name="customerUploadFrm" id="customerUploadFrm" class="form-horizontal" ng-submit="submitCustomerUploadFrmData()" role="form" novalidate>
+            <div id="customerUploadFrmContent" class="row">
+                <div class="col-sm-5">
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_Company.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Company</label>
+                        <div class="col-sm-8">
+                            <input  required type="text" class="form-control" name="t_Company" id="t_Company" ng-model="customerUploadData.t_Company">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_Name.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Name</label>
+                        <div class="col-sm-8">
+                            <input required type="text" class="form-control" name="t_Name" id="t_Name" ng-model="customerUploadData.t_Name">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_Address.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Address</label>
+                        <div class="col-sm-8">
+                            <input required type="text" class="form-control" name="t_Address" id="t_Address" ng-model="customerUploadData.t_Address">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_City.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">City</label>
+                        <div class="col-sm-8">
+                            <input required type="text" class="form-control" name="t_City" id="t_City" ng-model="customerUploadData.t_City">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_State.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">State</label>
+                        <div class="col-sm-8">
+                            <select required class="form-control" name="t_State" id="t_State" ng-model="customerUploadData.t_State"
+                                    data-ng-options="state.t_StateAbbreviation as state.t_StateName for state in stateList">
+
+                            </select>
+                            <!--<input type="text" class="form-control" name="t_State" id="t_State">-->
+                        </div>
+                    </div>
+                    <div class="form-group"  ng-class="{ 'has-error' : customerUploadFrm.t_Zip.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Zip</label>
+                        <div class="col-sm-4">
+                             <input required type="text" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/" class="form-control" name="t_Zip" id="t_Zip" ng-model="customerUploadData.t_Zip">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_Phone.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Phone</label>
+                        <div class="col-sm-8">
+                            <input required type="text" class="form-control" number-mask-input name="t_Phone" id="t_Phone" ng-model="customerUploadData.t_Phone">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_Email.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Email</label>
+                        <div class="col-sm-8">
+                            <input required type="Email" class="form-control" name="t_Email" id="t_Email" ng-model="customerUploadData.t_Email">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_IndyContact.$invalid && submitted}">
+                        <label class="col-sm-4 control-label">Indy Contact</label>
+                        <div class="col-sm-8">
+                            <select required class="form-control" name="t_IndyContact" id="t_IndyContact" ng-model="customerUploadData.t_IndyContact">
+                                <option value="Any One">Any One</option>
+                                <option value="Jason Wilson">Jason Wilson</option>
+                                <option value="Chris Neilson">Chris Neilson</option>
+                                <option value="Steve Kendall">Steve Kendall</option>
+                                <option value="Don Berger">Don Berger</option>
+                                <option value="Jason Taylor">Jason Taylor</option>
+                                <option value="Will Fields">Will Fields</option>
+                                <option value="Chris Bland">Chris Bland</option>
+                                <option value="Wayne Willis">Wayne Willis</option>
+                                <option value="Dave Tegmeyer">Dave Tegmeyer</option>
+                                <option value="Rue Bennet">Rue Bennet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-7">
+                     <div  id="uploader">
+                        <h3>Select Files to Upload</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Name</th>
+                                    <th ng-show="uploader.isHTML5">Size</th>
+                                    <th ng-show="uploader.isHTML5">Progress</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in uploader.queue">
+                                    <td><strong>{{ item.file.name }}</strong></td>
+                                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                    <td ng-show="uploader.isHTML5">
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                    </td>
+                                    
+                                    <td nowrap>
+                                    <!--
+                                        <button type="button" class="btn btn-success btn-xs" ng-show="!customerUploadFrm.$invalid" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> Upload
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" ng-show="!customerUploadFrm.$invalid" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                        </button>
+                                    -->
+                                        <button type="button" class="btn btn-default btn-xs" ng-show="!customerUploadFrm.$invalid" ng-click="item.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                        </button>
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                             <div>
+                                Queue progress:
+                                <div class="progress" style="">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <a class="btn btn-default" data-add-img-directive ng-disabled="uploader.isUploading">
+                                <span class="glyphicon glyphicon-upload"></span> Add Files
+                            </a>
+                            <button type="button" class="btn btn-success btn-s" ng-show="uploader.queue.length && !customerUploadFrm.$invalid" ng-click="submitCustomerUploadFrmData()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            <!--
+                            <button type="button" class="btn btn-success btn-s" ng-show="uploader.queue.length && !customerUploadFrm.$invalid" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            -->
+                            <button type="button" class="btn btn-default btn-s" ng-show="uploader.queue.length && !customerUploadFrm.$invalid" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                            </button>
+                            <button type="button" class="btn btn-default btn-s"  ng-show="uploader.queue.length && !customerUploadFrm.$invalid" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                <span class="glyphicon glyphicon-trash"></span> Remove all
+                            </button>
+                            
+                            <!--
+                            <button ng-show="uploader.queue.length && !customerUploadFrm.$invalid" type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            <button ng-show="uploader.queue.length && !customerUploadFrm.$invalid" type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                            </button>
+                            <button ng-show="uploader.queue.length && !customerUploadFrm.$invalid" type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                <span class="glyphicon glyphicon-trash"></span> Remove all
+                            </button>-->
+                            <input type="file" uploader="uploader"  class="hide" nv-file-select="" multiple/>
+                        </div>
+                     </div>
+                     <div id="estTimeLeft" class="hide">
+                            <div class="well text-center">
+                                 <p class="text-muted" style="color:#0A0A0A;font: normal 16px sans-serif;">Estimated time Left (All Files):0 min 0 sec</p>
+                            </div>
+                     </div>
+                </div>
+            </div>
+            <hr /> 
+            <div text-angular ng-model="customerUploadData.t_Note" ta-toolbar="[['bold','italics','underline','ul','ol','redo','undo','clear'],['justifyLeft','justifyCenter','justifyRight']]">
+                
+            </div>
+            
+            <div id="estTimeLeft" class="col-sm-12 hide">
+                <div class="well text-center">
+                     <p class="text-muted" style="color:#0A0A0A;font: normal 16px sans-serif;">Estimated time Left (All Files):0 min 0 sec</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="customerUploadModuleApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Fav and touch icons -->
+        <link rel="shortcut icon" href="img/ii_logo_fav.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+        
+        <title ng-bind="$root.title"></title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+        
+        <!-------Bootstrap CSS files ------------------------------------>
+        <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
+        <!--<link href="css/mediaQueryBootStrap.css" rel="stylesheet" media="screen">-->
+ 
+        <!------------   Libray JS files ----------------------->
+        <script src="../lib/jquery/jquery-1.10.2.min.js"></script>
+        
+        <script src="../lib/jquery/jquery.maskedinput.js"></script>
+        
+        <script type="text/javascript" charset="utf-8" src="../lib/jquery-cookie-master/jquery.cookie.js"></script>
+        
+         <script  src="../lib/underscoreJS/underscore-min_1.5.1.js"></script>
+        
+        <script src="../lib/angular/js/angular.min.js"></script>
+        
+        <!--<script src="../lib/angular/js/angular-cookies.min.js"></script>-->
+        
+        <!--<script src="../lib/angular/js/angular-sanitize.min.js"></script>-->
+        <script src="../lib/angular/js/angular-resource.js"></script>
+        <script src="../lib/angular/js/angular-route.js"></script>
+
+        <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript"  src="../lib/angularUI/ui-bootstrap-tpls-0.10.0.min.js"></script>
+        
+        <!--<script type="text/javascript" src="../lib/bower_components/angular-ui-utils/ui-utils.js"></script>-->
+        <!--<script src="../lib/angular-scroll/angular-scroll.min.js"></script>-->
+        
+        <script src="../lib/angular-file-upload/angular-file-upload.js"></script>
+        
+        <script src='../lib/textAngular-1.2.1/dist/textAngular-sanitize.min.js'></script>
+        <script src='../lib/textAngular-1.2.1/dist/textAngular.min.js'></script>
+        
+     
+       
+        <!-----Address JS files -------------------->
+        <script src="app.js"></script>
+        
+        <!-- AngularJS  Controller -->
+        <script src="js/controllers/custUploadFrmCtrl.js"></script>
+     
+        
+        
+        <!-- AngularJS Service -->
+        <script src="js/services/statesProvider.js"></script>
+        <script src="js/services/myCookieService.js"></script>
+        <script src="js/services/uploadService.js"></script>
+        <script src="js/services/uploadFilesService.js"></script>
+        
+        <!-- AngularJS Directives -->
+        <script src="js/directives/focus.js"></script>
+        <script src="js/directives/inputMaskDirective.js"></script>
+        <script src="js/directives/addImgDir.js"></script>
+        
+        <script type="text/javascript"> 
+            var $buoop = {}; 
+            $buoop.ol = window.onload; 
+            window.onload=function(){ 
+             try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+             var e = document.createElement("script"); 
+             e.setAttribute("type", "text/javascript"); 
+             e.setAttribute("src", "//browser-update.org/update.js"); 
+             document.body.appendChild(e); 
+            } 
+        </script> 
+        
+        <style>
+            .my-drop-zone { border: dotted 3px lightgray; }
+            .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+            .another-file-over-class { border: dotted 3px green; }
+            
+            //.my-drop-zone { border: dotted 3px lightgray; }
+            //.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+            //.another-file-over-class { border: dotted 3px green; }
+            .ta-editor {
+              min-height: 100px;
+              height: auto;
+              overflow: auto;
+              font-family: inherit;
+              font-size: 100%;
+            }
+            .btn-toolbar{
+                margin-bottom:5px
+            }
+        </style>
+      
+    </head>
+    <body>
+        <div ng-view>
+             
+        </div>
+    </body>
+</html>
+
