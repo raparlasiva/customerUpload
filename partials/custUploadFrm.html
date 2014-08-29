@@ -32,10 +32,11 @@
                     <div class="form-group" ng-class="{ 'has-error' : customerUploadFrm.t_State.$invalid && submitted}">
                         <label class="col-sm-4 control-label">State</label>
                         <div class="col-sm-8">
-                            <select required class="form-control" name="t_State" id="t_State" ng-model="customerUploadData.t_State"
-                                    <!--data-ng-options="state.t_StateAbbreviation as state.t_StateName for state in stateList"-->>
+							<input type="text" required class="form-control" name="t_State" id="t_State" ng-model="customerUploadData.t_State">
+                            <!--<select required class="form-control" name="t_State" id="t_State" ng-model="customerUploadData.t_State"
+                                    data-ng-options="state.t_StateAbbreviation as state.t_StateName for state in stateList">
 
-                            </select>
+                            </select>-->
                             <!--<input type="text" class="form-control" name="t_State" id="t_State">-->
                         </div>
                     </div>
