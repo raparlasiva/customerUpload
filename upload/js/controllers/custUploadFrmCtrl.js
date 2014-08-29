@@ -121,7 +121,7 @@ custUploadFrmController.controller('custUploadFrmCtrl',  ['$scope','$location','
         //$scope.stateList               = getStatesResourceSvc.getStatesFromStatesTbl.query();
         var uploader = $scope.uploader = new indyImagingUploader({
             //url:'http://'+location.hostname+'/tools/uploadFiles/uploadfiles_api/uploadCustomerFiles?format=json',
-            url:upload.php,
+            url:'upload.php',
 			formData:[]
         });
         uploader.onTest2 = function(progress){
