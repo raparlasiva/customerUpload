@@ -88,35 +88,41 @@ custUploadFrmController.controller('custUploadFrmCtrl',  ['$scope','$location','
         
         $scope.submitCustomerUploadFrmData = function(){
             //alert("inside submit event"); 
-            getUploadResourceSvc.updateUploadTblData.update({'formData':$scope.customerUploadData},function(response){
+			$scope.uploader.uploadAll();  
+            
+			//getUploadResourceSvc.updateUploadTblData.update({'formData':$scope.customerUploadData},function(response){
                 //console.log(response);
-                $scope.dynamicUploadID['kf_Upload']  = response.uploadID;
-                $scope.uploader.uploadAll();  
-            });
+                //$scope.dynamicUploadID['kf_Upload']  = response.uploadID;
+                //$scope.uploader.uploadAll();  
+            //});
+			
           
         };
         
         $scope.cancelCustomerUploadFrmData = function(){
             //console.info("cancel upload");
-            
-            getUploadResourceSvc.cancelUpload.update({'kp_Upload':$scope.dynamicUploadID['kf_Upload'],'t_UploadAction':'cancel'},function(response){
-                //console.log(response);
-                if(response)
-                {
-                   $scope.cancelUploadFile = true;
-                   
-                   $scope.uploader.cancelAll(); 
-                }    
-                //$scope.dynamicUploadID['kf_Upload']  = response.uploadID;
-                  
-            });
+            $scope.uploader.cancelAll(); 
+            /*
+				getUploadResourceSvc.cancelUpload.update({'kp_Upload':$scope.dynamicUploadID['kf_Upload'],'t_UploadAction':'cancel'},function(response){
+					//console.log(response);
+					if(response)
+					{
+					   $scope.cancelUploadFile = true;
+					   
+					   $scope.uploader.cancelAll(); 
+					}    
+					//$scope.dynamicUploadID['kf_Upload']  = response.uploadID;
+					  
+				});
+			*/
         };
       
         //get State List from country name
-        $scope.stateList               = getStatesResourceSvc.getStatesFromStatesTbl.query();
+        //$scope.stateList               = getStatesResourceSvc.getStatesFromStatesTbl.query();
         var uploader = $scope.uploader = new indyImagingUploader({
-            url:'http://'+location.hostname+'/tools/uploadFiles/uploadfiles_api/uploadCustomerFiles?format=json',
-            formData:[]
+            //url:'http://'+location.hostname+'/tools/uploadFiles/uploadfiles_api/uploadCustomerFiles?format=json',
+            url:upload.php
+			formData:[]
         });
         uploader.onTest2 = function(progress){
             var time = Date.now() - this.timeStamp;
@@ -232,7 +238,7 @@ custUploadFrmController.controller('custUploadFrmCtrl',  ['$scope','$location','
             
             //alert(index);
             //alert($scope.dynamicUploadID['kf_Upload']);
-            item.formData.push({kf_Upload: $scope.dynamicUploadID['kf_Upload']});
+            //item.formData.push({kf_Upload: $scope.dynamicUploadID['kf_Upload']});
            
             console.info(item.formData);
             
@@ -449,11 +455,13 @@ custUploadFrmController.controller('custUploadFrmCtrl',  ['$scope','$location','
             {
                  if(!$scope.cancelUploadFile)
                 {
-                    getUploadResourceSvc.successEmail.post({uploadFrmID: $scope.dynamicUploadID['kf_Upload'],id:fileNames,
-                        customerName:$scope.customerUploadData.t_Name,customerEmail:$scope.customerUploadData.t_Email,
-                        notesName:$scope.customerUploadData.t_Note},function(response){
+					/*
+							getUploadResourceSvc.successEmail.post({uploadFrmID: $scope.dynamicUploadID['kf_Upload'],id:fileNames,
+								customerName:$scope.customerUploadData.t_Name,customerEmail:$scope.customerUploadData.t_Email,
+								notesName:$scope.customerUploadData.t_Note},function(response){
 
-                    });
+							});
+					*/
 
                     //open a modal window and give the user a feed back
                     modalCustUploadFeedBack= $modal.open({
@@ -481,17 +489,7 @@ custUploadFrmController.controller('custUploadFrmCtrl',  ['$scope','$location','
             {
                 // something went wrong // submit uploadID and UploadFiles ID collected from the dynamic array
                 // also the uploader.que files and file details
-                getUploadResourceSvc.errorEmail.post({customerEmail:$scope.customerUploadData.t_Email,customerName:$scope.customerUploadData.t_Name, 
-                        t_IndyContact:$scope.customerUploadData.t_IndyContact,
-                        customerPhone:$scope.customerUploadData.t_Phone,
-                        uploadFrmID: $scope.dynamicUploadID['kf_Upload'],
-                        uploadFileNames:$scope.fileNames,
-                        uploadedFileArry:$scope.dynamicUploadFilesID,
-                        uploadErrCode:$scope.uploadErrCode,
-                        uploadErrMsg:$scope.uploadErrMsg,
-                        notesName:$scope.customerUploadData.t_Note},function(response){
-
-                });
+                
                 modalErrorCustUpload= $modal.open({
                     templateUrl: 'partials/custUploadErrorModal.html',
                     controller: modalErrorCustUploadInstanceCtrl,
